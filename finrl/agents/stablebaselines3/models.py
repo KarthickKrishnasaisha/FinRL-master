@@ -42,37 +42,32 @@ class TensorboardCallback(BaseCallback):
     def _on_step(self) -> bool:
         try:
             self.logger.record(key="train/reward", value=self.locals["rewards"][0])
-
-        except BaseException as error:
+        except BaseException:
             try:
                 self.logger.record(key="train/reward", value=self.locals["reward"][0])
-
-            except BaseException as inner_error:
-                # Handle the case where neither "rewards" nor "reward" is found
-                self.logger.record(key="train/reward", value=None)
-                # Print the original error and the inner error for debugging
-                print("Original Error:", error)
-                print("Inner Error:", inner_error)
+            except BaseException:
+                # If neither exists, just skip (avoid console spam)
+                pass
         return True
 
     def _on_rollout_end(self) -> bool:
+        # Only on-policy algorithms (A2C, PPO) have rollout_buffer.
+        # Off-policy algorithms (DDPG, SAC, TD3) do not.
+        if not hasattr(self.model, "rollout_buffer") or self.model.rollout_buffer is None:
+            return True
+
         try:
-            rollout_buffer_rewards = self.locals["rollout_buffer"].rewards.flatten()
-            self.logger.record(
-                key="train/reward_min", value=min(rollout_buffer_rewards)
-            )
-            self.logger.record(
-                key="train/reward_mean", value=statistics.mean(rollout_buffer_rewards)
-            )
-            self.logger.record(
-                key="train/reward_max", value=max(rollout_buffer_rewards)
-            )
-        except BaseException as error:
-            # Handle the case where "rewards" is not found
-            self.logger.record(key="train/reward_min", value=None)
-            self.logger.record(key="train/reward_mean", value=None)
-            self.logger.record(key="train/reward_max", value=None)
-            print("Logging Error:", error)
+            rollout_buffer_rewards = self.model.rollout_buffer.rewards.flatten()
+            if rollout_buffer_rewards.size == 0:
+                return True
+
+            self.logger.record(key="train/reward_min", value=float(rollout_buffer_rewards.min()))
+            self.logger.record(key="train/reward_mean", value=float(rollout_buffer_rewards.mean()))
+            self.logger.record(key="train/reward_max", value=float(rollout_buffer_rewards.max()))
+        except BaseException:
+            # Avoid printing spam from a callback
+            pass
+
         return True
 
 
