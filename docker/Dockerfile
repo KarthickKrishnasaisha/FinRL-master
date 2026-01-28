@@ -4,11 +4,11 @@ WORKDIR /src
 
 COPY requirements.txt .
 
-# Use python -m pip because pip is not on PATH in this image (conda-based)
-RUN python -m pip install --upgrade pip \
- && python -m pip install -r requirements.txt -I
+# Use python3 -m pip because pip is not on PATH in this image (conda-based)
+RUN python3 -m pip install --upgrade pip \
+ && python3 -m pip install -r requirements.txt -I
 
-RUN python -m pip install jupyterlab
+RUN python3 -m pip install jupyterlab
 
 # Add Tini. Tini operates as a process subreaper for jupyter.
 ENV TINI_VERSION=v0.6.0
