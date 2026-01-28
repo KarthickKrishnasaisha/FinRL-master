@@ -13,10 +13,10 @@ RUN apt-get update \
 COPY requirements.txt .
 
 # Use python3 -m pip (pip command may not exist)
-RUN python3 -m pip install --upgrade pip \
- && python3 -m pip install -r requirements.txt -I
+RUN python -m pip install --upgrade pip \
+ && python -m pip install -r requirements.txt -I
 
-RUN python3 -m pip install jupyterlab
+RUN python -m pip install jupyterlab
 
 # Add Tini. Tini operates as a process subreaper for jupyter.
 ENV TINI_VERSION=v0.6.0
