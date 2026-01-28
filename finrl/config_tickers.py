@@ -5,37 +5,38 @@ SINGLE_TICKER = ["AAPL"]
 # Dow 30 constituents in 2021/10
 # check https://wrds-www.wharton.upenn.edu/ for U.S. index constituents
 DOW_30_TICKER = [
-    "AXP",
-    "AMGN",
-    "AAPL",
-    "BA",
-    "CAT",
-    "CSCO",
-    "CVX",
-    "GS",
-    "HD",
-    "HON",
-    "IBM",
-    "INTC",
-    "JNJ",
-    "KO",
-    "JPM",
-    "MCD",
-    "MMM",
-    "MRK",
-    "MSFT",
-    "NKE",
-    "PG",
-    "TRV",
-    "UNH",
-    "CRM",
-    "VZ",
-    "V",
-    "WBA",
-    "WMT",
-    "DIS",
-    "DOW",
+    "AAPL",   # Apple
+    "MSFT",   # Microsoft
+    "AMZN",   # Amazon
+    "NVDA",   # NVIDIA
+    "AXP",    # American Express
+    "AMGN",   # Amgen
+    "BA",     # Boeing
+    "CAT",    # Caterpillar
+    "CSCO",   # Cisco
+    "CVX",    # Chevron
+    "GS",     # Goldman Sachs
+    "HD",     # Home Depot
+    "HON",    # Honeywell
+    "IBM",    # IBM
+    "JNJ",    # Johnson & Johnson
+    "KO",     # Coca-Cola
+    "JPM",    # JPMorgan Chase
+    "MCD",    # McDonald's
+    "MMM",    # 3M
+    "MRK",    # Merck
+    "NKE",    # Nike
+    "PG",     # Procter & Gamble
+    "TRV",    # Travelers
+    "UNH",    # UnitedHealth Group
+    "CRM",    # Salesforce
+    "VZ",     # Verizon
+    "V",      # Visa
+    "WMT",    # Walmart
+    "DIS",    # Disney
+    "DOW",    # Dow Inc.
 ]
+
 
 # Nasdaq 100 constituents at 2019/01
 NAS_100_TICKER = [
