@@ -1,9 +1,10 @@
 name: Run Tests!
 
-push:
+on:
+ push:
     branches: [ master ]
-  pull_request:
-  workflow_dispatch:
+ pull_request:
+ workflow_dispatch:
 
 jobs:
   tests:
